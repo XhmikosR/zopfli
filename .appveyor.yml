@@ -1,0 +1,18 @@
+image:
+  - Visual Studio 2017
+
+version: "{build}"
+
+clone_depth: 5
+
+build: off
+
+test_script:
+  - call "build.bat"
+
+artifacts:
+  - path: bin\Release_x64\zopflipng.exe
+    name: zopflipng
+
+matrix:
+  fast_finish: true
