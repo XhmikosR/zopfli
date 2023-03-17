@@ -10,14 +10,14 @@ env:
 jobs:
   ci:
     runs-on: windows-latest
-    if: "!contains(github.event.commits[0].message, '[ci skip]') && !contains(github.event.commits[0].message, '[skip ci]')"
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           # We need to get all git revisions for the version number to work
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1
@@ -37,7 +37,7 @@ jobs:
         shell: bash
 
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: "zopflipng-${{ env.ZOPFLI_VER }}"
           path: dist/
